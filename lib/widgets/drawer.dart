@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: use_key_in_widget_constructors
 class MyDrawer extends StatelessWidget {
   
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_declarations
     final _imageURL = "https://media-exp2.licdn.com/dms/image/C4D03AQEWQk6SIJUtXQ/profile-displayphoto-shrink_800_800/0/1654339103114?e=1661385600&v=beta&t=B4Le6Ov_diN18f3ccvPrsjBWmRsCCEaAiSuHMHIMZCo";
     return Drawer(
+      // ignore: avoid_unnecessary_containers
       child:Container(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -25,6 +28,7 @@ class MyDrawer extends StatelessWidget {
              )
             ),
              const ListTile(
+              // ignore: unnecessary_const
               leading: const Icon(
                 CupertinoIcons.home,
                 color: Colors.black,
@@ -33,7 +37,7 @@ class MyDrawer extends StatelessWidget {
               textScaleFactor: 1.3,
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(
                 CupertinoIcons.profile_circled,
                 color: Colors.black,
@@ -43,7 +47,7 @@ class MyDrawer extends StatelessWidget {
               textScaleFactor: 1.3,
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(
                 CupertinoIcons.mail,
                 color: Colors.black,
