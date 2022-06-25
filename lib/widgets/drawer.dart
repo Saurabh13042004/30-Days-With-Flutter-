@@ -1,3 +1,6 @@
+// ignore: unnecessary_import
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,15 +15,25 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       // ignore: avoid_unnecessary_containers
       child:Container(
+        
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
+            
             padding: EdgeInsets.zero,
             child: UserAccountsDrawerHeader(
+              // ignore: prefer_const_constructors
+              decoration:BoxDecoration(
+                color: Colors.deepPurple,
+              ),
               margin: EdgeInsets.zero,
               
-              accountName: const Text("Saurabh Shukla"),
+              accountName: const Text("Saurabh Shukla",
+               style: TextStyle(
+                fontWeight: FontWeight.bold,
+               ),
+              ),
              accountEmail: const Text("sv176734@gmail.com"),
              currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage(_imageURL),
