@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
 import 'package:flutter_application_1/widgets/drawer.dart';
 import '../widgets/item_widget.dart';
+import 'dart:core';
 // ignore: unused_import
 import 'login_page.dart';
 import 'dart:convert';
@@ -15,32 +16,46 @@ class homePage extends StatefulWidget {
   State<homePage> createState() => _homePageState();
 }
 
+// ignore: camel_case_types
 class _homePageState extends State<homePage> {
 
   
   @override
-  void initState(){
+  void initState() {
     super.initState();
     loadData();
   }
-  loadData()async {
-    var catalogJson = await rootBundle.loadString("assets/files/catalog.json");
-    var decodedJson = jsonDecode(catalogJson);
-    var productData = jsonDecode(decodedJson);
+
+  loadData() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final catalogJson =
+        await rootBundle.loadString('assets/catalog.json');
+    final decodedData = jsonDecode(catalogJson);
+    var productsData = decodedData["products"];
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
+@override
   Widget build(BuildContext context) {
-    final dummy_list = List.generate(25, (index) => CatalogModel.items[0]);
+   
     return Scaffold(
       appBar: AppBar(
         title:  const Text("Catalog App")),
         body: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: ListView.builder(
-            itemCount: dummy_list.length,
+          child: (CatalogModel.items!=null && CatalogModel.items.isNotEmpty) ?  ListView.builder(
+            itemCount: CatalogModel.items.length,
             itemBuilder: (context,index){
               return ItemWidget(
-                item:dummy_list[index]);
+                item:CatalogModel.items[index]
+                );
             },
+          )
+          :Center(
+
+            child:CircularProgressIndicator(),
           ),
         ) ,
         drawer:   MyDrawer(),
