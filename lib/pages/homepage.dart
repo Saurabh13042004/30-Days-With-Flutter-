@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
-import 'package:flutter_application_1/widgets/drawer.dart';
-import '../widgets/item_widget.dart';
 import 'dart:core';
 // ignore: unused_import
-import 'login_page.dart';
+import '../widgets/home_widgets/catalog_header.dart';
+import '../widgets/home_widgets/catalog_list.dart';
+
 import 'dart:convert';
+import 'package:velocity_x/velocity_x.dart';
 
 // ignore: camel_case_types
 class homePage extends StatefulWidget {
@@ -41,62 +42,31 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
    
     return Scaffold(
-      appBar: AppBar(
-        title:  const Text("Catalog App")),
-        body: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: (CatalogModel.items!=null && CatalogModel.items.isNotEmpty)
-          ?GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16
-              ), 
-            itemBuilder: (context,index){
-               final item = CatalogModel.items[index];
-              return Card(
-
-                clipBehavior: Clip.antiAlias,
-               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8)
-               ),
-               child:GridTile(
-                header: Container
-                (child: Text(item.name,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                ),
-                padding: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-
-                ),
-                ),
-                 child:Image.network(item.image),
-                 footer: Container
-                (child: Text(item.price.toString(),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                ),
-                padding: EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-
-                ),
-                ),
-                ),
-                );
-            },
-            itemCount: CatalogModel.items.length,
-            ) 
-          :Center(
-
-            child:CircularProgressIndicator(),
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [const CatalogHeader(),
+              // ignore: unnecessary_null_comparison
+              if (CatalogModel.items != null && CatalogModel.items.isNotEmpty ) 
+                const CatalogList().expand()
+              
+              else
+                
+                  const CircularProgressIndicator().centered().py16().expand(),
+                  
+            
+              ],
+            ),
           ),
-        ) ,
-        drawer:   MyDrawer(),
+        ),
     );
   }
-}
+  }
+
+
+
+
+
+
