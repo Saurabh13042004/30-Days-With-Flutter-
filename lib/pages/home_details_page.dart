@@ -11,7 +11,9 @@ final Item catalog;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: Mytheme.creamColor,
       bottomNavigationBar: Container(
         
@@ -57,6 +59,7 @@ final Item catalog;
                         catalog.name.text.xl4.color(Mytheme.darkBluishColor).bold.make(),
                 catalog.desc.text.xl.textStyle(context.captionStyle).make(),
                 10.heightBox,
+                "Vero lorem vero sed no duo invidunt, et kasd kasd lorem ut magna aliquyam ut erat sea, stet sit invidunt.".text.xl.textStyle(context.captionStyle).make().p24(),
                       ],
                     ).py64(),
                     ),
